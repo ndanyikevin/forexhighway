@@ -1,0 +1,130 @@
+.fh-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: var(--fh-radius-md);
+
+  font-family: var(--fh-font-family-sans);
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease,
+    transform 100ms ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--fh-color-primary);
+    outline-offset: 2px;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--sm {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &--md {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &--lg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  &--primary {
+    background: var(--fh-color-primary);
+    color: var(--fh-color-text);
+
+    &:hover:not(:disabled) {
+      background: var(--fh-color-primary-hover);
+    }
+  }
+
+  &--secondary {
+    background: var(--fh-color-surface-raised);
+    color: var(--fh-color-text);
+    border-color: var(--fh-color-border);
+
+    &:hover:not(:disabled) {
+      background: var(--fh-color-border);
+    }
+  }
+
+  &--danger {
+    background: var(--fh-color-danger);
+    color: var(--fh-color-text);
+
+    &:hover:not(:disabled) {
+      background: var(--fh-color-danger-hover);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--fh-color-text);
+
+    &:hover:not(:disabled) {
+      background: var(--fh-color-surface);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: var(--fh-color-text);
+    border-color: var(--fh-color-border);
+
+    &:hover:not(:disabled) {
+      background: var(--fh-color-surface);
+    }
+  }
+
+  &__spinner {
+    width: 1rem;
+    height: 1rem;
+
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--fh-radius-full);
+
+    animation: fh-icon-button-spin 700ms linear infinite;
+  }
+}
+
+@keyframes fh-icon-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fh-icon-button {
+    transition: none;
+
+    &__spinner {
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@forexhighway/styles",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "default": "./dist/forexhighway.css"
+    },
+    "./css": {
+      "default": "./dist/forexhighway.css"
+    },
+    "./scss": {
+      "default": "./src/index.scss"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/forexhighway.css",
+    "src/index.scss",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "sass src/index.scss dist/forexhighway.css --style=expanded",
+    "watch": "sass src/index.scss dist/forexhighway.css --watch --style=expanded"
+  },
+  "devDependencies": {
+    "sass": "^1.104.1"
+  }
+}

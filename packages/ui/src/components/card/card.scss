@@ -1,0 +1,53 @@
+.fh-card {
+  width: 100%;
+
+  background: var(--fh-color-surface-raised);
+  color: var(--fh-color-text);
+
+  border: 1px solid var(--fh-color-border);
+  border-radius: var(--fh-radius-lg);
+
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fh-spacing-1);
+
+    padding: var(--fh-spacing-6);
+  }
+
+  &__title {
+    margin: 0;
+
+    color: var(--fh-color-text);
+
+    font-size: var(--fh-font-size-lg);
+    font-weight: var(--fh-font-weight-semibold);
+    line-height: var(--fh-line-height-tight);
+  }
+
+  &__description {
+    margin: 0;
+
+    color: var(--fh-color-text-muted);
+
+    font-size: var(--fh-font-size-sm);
+    line-height: var(--fh-line-height-normal);
+  }
+
+  &__content {
+    padding: 0 var(--fh-spacing-6) var(--fh-spacing-6);
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--fh-spacing-3);
+
+    padding: var(--fh-spacing-4) var(--fh-spacing-6);
+
+    border-top: 1px solid var(--fh-color-border);
+    
+  }
+}
