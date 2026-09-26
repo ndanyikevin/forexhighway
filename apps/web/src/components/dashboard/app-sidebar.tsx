@@ -8,6 +8,7 @@ import {
 } from "lucide-solid";
 
 import { A } from "@solidjs/router";
+import { For } from "solid-js";
 
 import {
     Sidebar,
@@ -61,89 +62,118 @@ const resourcesNavigation = [
 
 export default function AppSidebar() {
     return (
-        <Sidebar>
-            <SidebarHeader>
-                <div class="flex h-12 items-center px-2">
-                    <A
-                        href="/dashboard"
-                        class="flex items-center gap-2"
-                    >
-                        <div class="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary font-bold text-primary-foreground">
-                            F
-                        </div>
-
-                        <span class="font-semibold tracking-tight">
-                            ForexHighway
-                        </span>
-                    </A>
-                </div>
+        <Sidebar
+            collapsible="icon"
+            class="border-r border-border bg-sidebar text-sidebar-foreground"
+        >
+            <SidebarHeader class="border-b border-sidebar-border/50">
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton size="lg" as={A} href="/dashboard">
+                            <img
+                                src="/logo.png"
+                                alt="ForexHighway Logo"
+                                class="size-8 shrink-0 rounded-lg object-contain"
+                            />
+                            <div class="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
+                                <span class="truncate font-semibold text-sidebar-foreground">
+                                    ForexHighway
+                                </span>
+                                <span class="truncate text-xs text-muted-foreground">
+                                    Workspace
+                                </span>
+                            </div>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
             </SidebarHeader>
 
-            <SidebarContent>
+            <SidebarContent class="bg-sidebar">
                 <SidebarGroup>
-                    <SidebarGroupLabel>
+                    <SidebarGroupLabel class="text-sidebar-foreground/70">
                         Workspace
                     </SidebarGroupLabel>
 
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {workspaceNavigation.map((item) => (
-                                <SidebarMenuItem>
-                                    <SidebarMenuButton
-                                        as={A}
-                                        href={item.href}
-                                        end={item.end}
-                                    >
-                                        <item.icon class="size-4" />
-
-                                        <span>
-                                            {item.title}
-                                        </span>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
+                            <For each={workspaceNavigation}>
+                                {(item) => {
+                                    const Icon = item.icon;
+                                    return (
+                                        <SidebarMenuItem>
+                                            <SidebarMenuButton
+                                                as={A}
+                                                href={item.href}
+                                                end={item.end}
+                                                tooltip={item.title}
+                                                class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                                            >
+                                                <Icon class="size-4 shrink-0 text-sidebar-foreground" />
+                                                <span class="group-data-[collapsible=icon]:hidden">
+                                                    {item.title}
+                                                </span>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    );
+                                }}
+                            </For>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
 
                 <SidebarGroup>
-                    <SidebarGroupLabel>
+                    <SidebarGroupLabel class="text-sidebar-foreground/70">
                         Resources
                     </SidebarGroupLabel>
 
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {resourcesNavigation.map((item) => (
-                                <SidebarMenuItem>
-                                    <SidebarMenuButton
-                                        as={A}
-                                        href={item.href}
-                                    >
-                                        <item.icon class="size-4" />
-
-                                        <span>
-                                            {item.title}
-                                        </span>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
+                            <For each={resourcesNavigation}>
+                                {(item) => {
+                                    const Icon = item.icon;
+                                    return (
+                                        <SidebarMenuItem>
+                                            <SidebarMenuButton
+                                                as={A}
+                                                href={item.href}
+                                                tooltip={item.title}
+                                                class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                                            >
+                                                <Icon class="size-4 shrink-0 text-sidebar-foreground" />
+                                                <span class="group-data-[collapsible=icon]:hidden">
+                                                    {item.title}
+                                                </span>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    );
+                                }}
+                            </For>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
 
-            <SidebarFooter>
-                <div class="px-2 py-2">
-                    <div class="rounded-lg border border-sidebar-border p-3">
-                        <p class="text-sm font-medium">
-                            Kevin Ndanyi
-                        </p>
-
-                        <p class="text-xs text-muted-foreground">
-                            Trader
-                        </p>
-                    </div>
-                </div>
+            <SidebarFooter class="border-t border-sidebar-border/50 bg-sidebar">
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton
+                            size="lg"
+                            class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                        >
+                            <div class="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted font-medium text-foreground">
+                                KN
+                            </div>
+                            <div class="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
+                                <span class="truncate font-medium text-sidebar-foreground">
+                                    Kevin Ndanyi
+                                </span>
+                                <span class="truncate text-xs text-muted-foreground">
+                                    Trader
+                                </span>
+                            </div>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
             </SidebarFooter>
         </Sidebar>
     );

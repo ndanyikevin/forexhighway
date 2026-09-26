@@ -188,13 +188,15 @@ const Sidebar: Component<SidebarProps> = (rawProps) => {
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
-            class="w-[var(--sidebar-width)] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+            class="w-[var(--sidebar-width)] border-r border-sidebar-border bg-sidebar p-0 text-sidebar-foreground focus:outline-none"
             style={{
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE
             }}
             position={local.side}
           >
-            <div class="flex size-full flex-col">{local.children}</div>
+            <div class="flex size-full flex-col bg-sidebar text-sidebar-foreground">
+              {local.children}
+            </div>
           </SheetContent>
         </Sheet>
       </Match>
@@ -311,7 +313,7 @@ const SidebarInset: Component<ComponentProps<"main">> = (props) => {
   return (
     <main
       class={cn(
-        "relative flex min-h-svh flex-1 flex-col bg-background",
+        "relative flex min-h-svh flex-1 flex-col bg-background text-foreground",
         "peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow",
         local.class
       )}
