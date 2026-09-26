@@ -1,13 +1,13 @@
 import { Title } from "@solidjs/meta";
-import { Hero } from "~/components/Hero";
 
+import { Hero } from "~/components/Hero";
 
 export default function Home() {
   return (
     <main>
-      <Title>Forexhighway</Title>
-      <Hero / >
-      
+      <Title>ForexHighway</Title>
+
+      <Hero />
     </main>
   );
 }
