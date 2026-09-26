@@ -16,6 +16,7 @@ export default function Navbar() {
         { href: "/about", label: "About" },
         { href: "/education", label: "Education" },
         { href: "/journal", label: "Journal" },
+        { href: "/admin", label: "admin" },
     ];
 
     return (
