@@ -481,24 +481,58 @@ const sidebarMenuButtonVariants = cva(
   }
 );
 
-type SidebarMenuButtonProps<T extends ValidComponent = "button"> = ComponentProps<T> &
+type SidebarMenuButtonProps<T extends ValidComponent = "button"> =
+  ComponentProps<T> &
   VariantProps<typeof sidebarMenuButtonVariants> & {
     isActive?: boolean;
     tooltip?: string;
   };
 
-const SidebarMenuButton = <T extends ValidComponent = "button">(
-  rawProps: PolymorphicProps<T, SidebarMenuButtonProps<T>>
+const SidebarMenuButton = <
+  T extends ValidComponent = "button",
+>(
+  rawProps: PolymorphicProps<
+    T,
+    SidebarMenuButtonProps<T>
+  >,
 ) => {
-  const props = mergeProps({ isActive: false, variant: "default", size: "default" }, rawProps);
-  const [local, others] = splitProps(props as SidebarMenuButtonProps, [
-    "isActive",
-    "tooltip",
-    "variant",
-    "size",
-    "class"
-  ]);
-  const { isMobile, state } = useSidebar();
+  const props = mergeProps(
+    {
+      isActive: false,
+      variant: "default",
+      size: "default",
+    },
+    rawProps,
+  );
+
+  const [local, others] = splitProps(
+    props as SidebarMenuButtonProps,
+    [
+      "isActive",
+      "tooltip",
+      "variant",
+      "size",
+      "class",
+    ],
+  );
+
+  const {
+    isMobile,
+    state,
+    setOpenMobile,
+  } = useSidebar();
+
+  const handleClick = (event: MouseEvent) => {
+    if (isMobile()) {
+      setOpenMobile(false);
+    }
+
+    const target = event.currentTarget;
+
+    if (target instanceof HTMLElement) {
+      target.blur();
+    }
+  };
 
   const button = (
     <Polymorphic<SidebarMenuButtonProps>
@@ -507,18 +541,33 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
       data-size={local.size}
       data-active={local.isActive}
       class={cn(
-        sidebarMenuButtonVariants({ variant: local.variant, size: local.size }),
-        local.class
+        sidebarMenuButtonVariants({
+          variant: local.variant,
+          size: local.size,
+        }),
+        local.class,
       )}
+      onClick={handleClick}
       {...others}
     />
   );
 
   return (
-    <Show when={local.tooltip} fallback={button}>
+    <Show
+      when={local.tooltip}
+      fallback={button}
+    >
       <Tooltip placement="right">
-        <TooltipTrigger class="w-full">{button}</TooltipTrigger>
-        <TooltipContent hidden={state() !== "collapsed" || isMobile()}>
+        <TooltipTrigger class="w-full">
+          {button}
+        </TooltipTrigger>
+
+        <TooltipContent
+          hidden={
+            state() !== "collapsed" ||
+            isMobile()
+          }
+        >
           {local.tooltip}
         </TooltipContent>
       </Tooltip>

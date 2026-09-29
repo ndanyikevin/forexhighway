@@ -46,8 +46,8 @@ export default function Navbar() {
                         <A
                             href={link.href}
                             end={link.end}
-                            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                            activeClass="text-foreground font-semibold"
+                            class="border-b-2 border-transparent pb-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                            activeClass="border-primary !text-foreground font-semibold text-foreground"
                         >
                             {link.label}
                         </A>

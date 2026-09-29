@@ -7,7 +7,7 @@ import { Suspense } from "solid-js";
 import PublicLayout from "~/components/layouts/public-layout";
 
 import "@fontsource/inter";
-import "./app.css";
+import "./dark.css";
 
 const themeScript = `
     (function () {
