@@ -1,0 +1,30 @@
+{
+  "name": "@forexhighway/db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "db:test": "tsx src/test-connection.ts",
+    "db:migrate": "tsx src/migrate.ts",
+    "db:test-user": "tsx src/test-user.ts",
+    "check-types": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "pg": "^8.23.0",
+    "tsx": "^4.23.13",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "@types/pg": "^8.23.1",
+    "@types/ws": "^8.18.1"
+  }
+}

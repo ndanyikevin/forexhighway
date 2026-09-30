@@ -1,9 +1,13 @@
+
 import {
     BarChart3,
     BookOpen,
     ChartNoAxesCombined,
     LayoutDashboard,
+    List,
+    Plus,
     Settings,
+    TrendingUp,
     Wallet,
 } from "lucide-solid";
 
@@ -31,11 +35,6 @@ const workspaceNavigation = [
         end: true,
     },
     {
-        title: "Journal",
-        href: "/dashboard/journal",
-        icon: BookOpen,
-    },
-    {
         title: "Trading",
         href: "/dashboard/trading",
         icon: ChartNoAxesCombined,
@@ -44,6 +43,30 @@ const workspaceNavigation = [
         title: "Accounts",
         href: "/dashboard/accounts",
         icon: Wallet,
+    },
+];
+
+const journalNavigation = [
+    {
+        title: "Overview",
+        href: "/dashboard/journal",
+        icon: BookOpen,
+        end: true,
+    },
+    {
+        title: "Trades",
+        href: "/dashboard/journal/trades",
+        icon: List,
+    },
+    {
+        title: "New Trade",
+        href: "/dashboard/journal/new-trade",
+        icon: Plus,
+    },
+    {
+        title: "Performance",
+        href: "/dashboard/journal/performance",
+        icon: TrendingUp,
     },
 ];
 
@@ -69,16 +92,22 @@ export default function AppSidebar() {
             <SidebarHeader class="border-b border-sidebar-border/50">
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" as={A} href="/dashboard">
+                        <SidebarMenuButton
+                            size="lg"
+                            as={A}
+                            href="/dashboard"
+                        >
                             <img
                                 src="/logo.png"
                                 alt="ForexHighway Logo"
                                 class="size-8 shrink-0 rounded-lg object-contain"
                             />
+
                             <div class="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
                                 <span class="truncate font-semibold text-sidebar-foreground">
                                     ForexHighway
                                 </span>
+
                                 <span class="truncate text-xs text-muted-foreground">
                                     Workspace
                                 </span>
@@ -89,6 +118,8 @@ export default function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent class="bg-sidebar">
+
+                {/* Workspace */}
                 <SidebarGroup>
                     <SidebarGroupLabel class="text-sidebar-foreground/70">
                         Workspace
@@ -99,6 +130,7 @@ export default function AppSidebar() {
                             <For each={workspaceNavigation}>
                                 {(item) => {
                                     const Icon = item.icon;
+
                                     return (
                                         <SidebarMenuItem>
                                             <SidebarMenuButton
@@ -109,6 +141,7 @@ export default function AppSidebar() {
                                                 class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                                             >
                                                 <Icon class="size-4 shrink-0 text-sidebar-foreground" />
+
                                                 <span class="group-data-[collapsible=icon]:hidden">
                                                     {item.title}
                                                 </span>
@@ -121,6 +154,42 @@ export default function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
 
+                {/* Journal */}
+                <SidebarGroup>
+                    <SidebarGroupLabel class="text-sidebar-foreground/70">
+                        Journal
+                    </SidebarGroupLabel>
+
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <For each={journalNavigation}>
+                                {(item) => {
+                                    const Icon = item.icon;
+
+                                    return (
+                                        <SidebarMenuItem>
+                                            <SidebarMenuButton
+                                                as={A}
+                                                href={item.href}
+                                                end={item.end}
+                                                tooltip={item.title}
+                                                class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                                            >
+                                                <Icon class="size-4 shrink-0 text-sidebar-foreground" />
+
+                                                <span class="group-data-[collapsible=icon]:hidden">
+                                                    {item.title}
+                                                </span>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    );
+                                }}
+                            </For>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+
+                {/* Resources */}
                 <SidebarGroup>
                     <SidebarGroupLabel class="text-sidebar-foreground/70">
                         Resources
@@ -131,6 +200,7 @@ export default function AppSidebar() {
                             <For each={resourcesNavigation}>
                                 {(item) => {
                                     const Icon = item.icon;
+
                                     return (
                                         <SidebarMenuItem>
                                             <SidebarMenuButton
@@ -140,6 +210,7 @@ export default function AppSidebar() {
                                                 class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                                             >
                                                 <Icon class="size-4 shrink-0 text-sidebar-foreground" />
+
                                                 <span class="group-data-[collapsible=icon]:hidden">
                                                     {item.title}
                                                 </span>
@@ -151,6 +222,7 @@ export default function AppSidebar() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
+
             </SidebarContent>
 
             <SidebarFooter class="border-t border-sidebar-border/50 bg-sidebar">
@@ -163,10 +235,12 @@ export default function AppSidebar() {
                             <div class="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted font-medium text-foreground">
                                 KN
                             </div>
+
                             <div class="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
                                 <span class="truncate font-medium text-sidebar-foreground">
                                     Kevin Ndanyi
                                 </span>
+
                                 <span class="truncate text-xs text-muted-foreground">
                                     Trader
                                 </span>
@@ -178,3 +252,4 @@ export default function AppSidebar() {
         </Sidebar>
     );
 }
+
