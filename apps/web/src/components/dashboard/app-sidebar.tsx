@@ -38,13 +38,7 @@ const workspaceNavigation = [
         title: "Trading",
         href: "/dashboard/trading",
         icon: ChartNoAxesCombined,
-    },
-    {
-        title: "Accounts",
-        href: "/dashboard/accounts",
-        icon: Wallet,
-    },
-];
+    }]
 
 const journalNavigation = [
     {
