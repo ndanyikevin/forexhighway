@@ -8,11 +8,13 @@ import {
     Plus,
     Settings,
     TrendingUp,
-    Wallet,
 } from "lucide-solid";
 
 import { A } from "@solidjs/router";
+import type { Component, JSX } from "solid-js";
 import { For } from "solid-js";
+
+import { Separator } from "~/components/ui/separator";
 
 import {
     Sidebar,
@@ -27,20 +29,45 @@ import {
     SidebarMenuItem,
 } from "~/components/ui/sidebar";
 
-const workspaceNavigation = [
+interface NavigationItem {
+    title: string;
+    href: string;
+    icon: Component<{
+        size?: string | number;
+        class?: string;
+    }>;
+    end?: boolean;
+}
+
+const workspaceNavigation: NavigationItem[] = [
     {
         title: "Overview",
         href: "/dashboard",
         icon: LayoutDashboard,
         end: true,
     },
+];
+
+const tradingNavigation: NavigationItem[] = [
     {
-        title: "Trading",
+        title: "Overview",
         href: "/dashboard/trading",
         icon: ChartNoAxesCombined,
-    }]
+        end: true,
+    },
+    {
+        title: "Positions",
+        href: "/dashboard/trading/positions",
+        icon: TrendingUp,
+    },
+    {
+        title: "Orders",
+        href: "/dashboard/trading/orders",
+        icon: List,
+    },
+];
 
-const journalNavigation = [
+const journalNavigation: NavigationItem[] = [
     {
         title: "Overview",
         href: "/dashboard/journal",
@@ -64,7 +91,7 @@ const journalNavigation = [
     },
 ];
 
-const resourcesNavigation = [
+const resourcesNavigation: NavigationItem[] = [
     {
         title: "Education",
         href: "/education",
@@ -76,6 +103,47 @@ const resourcesNavigation = [
         icon: Settings,
     },
 ];
+
+function NavigationSection(props: {
+    title: string;
+    items: NavigationItem[];
+}) {
+    return (
+        <SidebarGroup>
+            <SidebarGroupLabel class="text-xs font-semibold uppercase tracking-wider text-primary">
+                {props.title}
+            </SidebarGroupLabel>
+
+            <SidebarGroupContent>
+                <SidebarMenu>
+                    <For each={props.items}>
+                        {(item) => {
+                            const Icon = item.icon;
+
+                            return (
+                                <SidebarMenuItem>
+                                    <SidebarMenuButton
+                                        as={A}
+                                        href={item.href}
+                                        end={item.end}
+                                        tooltip={item.title}
+                                        class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                                    >
+                                        <Icon class="size-4 shrink-0 text-sidebar-foreground" />
+
+                                        <span class="group-data-[collapsible=icon]:hidden">
+                                            {item.title}
+                                        </span>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            );
+                        }}
+                    </For>
+                </SidebarMenu>
+            </SidebarGroupContent>
+        </SidebarGroup>
+    );
+}
 
 export default function AppSidebar() {
     return (
@@ -112,111 +180,31 @@ export default function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent class="bg-sidebar">
+                <NavigationSection
+                    title="Workspace"
+                    items={workspaceNavigation}
+                />
 
-                {/* Workspace */}
-                <SidebarGroup>
-                    <SidebarGroupLabel class="text-sidebar-foreground/70">
-                        Workspace
-                    </SidebarGroupLabel>
+                <Separator class="mx-3 w-auto bg-sidebar-border/50" />
 
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <For each={workspaceNavigation}>
-                                {(item) => {
-                                    const Icon = item.icon;
+                <NavigationSection
+                    title="Trading"
+                    items={tradingNavigation}
+                />
 
-                                    return (
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton
-                                                as={A}
-                                                href={item.href}
-                                                end={item.end}
-                                                tooltip={item.title}
-                                                class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                                            >
-                                                <Icon class="size-4 shrink-0 text-sidebar-foreground" />
+                <Separator class="mx-3 w-auto bg-sidebar-border/50" />
 
-                                                <span class="group-data-[collapsible=icon]:hidden">
-                                                    {item.title}
-                                                </span>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
-                                    );
-                                }}
-                            </For>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+                <NavigationSection
+                    title="Journal"
+                    items={journalNavigation}
+                />
 
-                {/* Journal */}
-                <SidebarGroup>
-                    <SidebarGroupLabel class="text-sidebar-foreground/70">
-                        Journal
-                    </SidebarGroupLabel>
+                <Separator class="mx-3 w-auto bg-sidebar-border/50" />
 
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <For each={journalNavigation}>
-                                {(item) => {
-                                    const Icon = item.icon;
-
-                                    return (
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton
-                                                as={A}
-                                                href={item.href}
-                                                end={item.end}
-                                                tooltip={item.title}
-                                                class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                                            >
-                                                <Icon class="size-4 shrink-0 text-sidebar-foreground" />
-
-                                                <span class="group-data-[collapsible=icon]:hidden">
-                                                    {item.title}
-                                                </span>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
-                                    );
-                                }}
-                            </For>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-
-                {/* Resources */}
-                <SidebarGroup>
-                    <SidebarGroupLabel class="text-sidebar-foreground/70">
-                        Resources
-                    </SidebarGroupLabel>
-
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <For each={resourcesNavigation}>
-                                {(item) => {
-                                    const Icon = item.icon;
-
-                                    return (
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton
-                                                as={A}
-                                                href={item.href}
-                                                tooltip={item.title}
-                                                class="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                                            >
-                                                <Icon class="size-4 shrink-0 text-sidebar-foreground" />
-
-                                                <span class="group-data-[collapsible=icon]:hidden">
-                                                    {item.title}
-                                                </span>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
-                                    );
-                                }}
-                            </For>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-
+                <NavigationSection
+                    title="Resources"
+                    items={resourcesNavigation}
+                />
             </SidebarContent>
 
             <SidebarFooter class="border-t border-sidebar-border/50 bg-sidebar">
