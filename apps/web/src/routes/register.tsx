@@ -18,8 +18,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { showToast, Toaster } from "~/components/ui/toast";
 
-const API_BASE_URL =
-    import.meta.env.VITE_API_URL || "http://localhost:4000";
+import { apiFetch } from "~/lib/api";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -38,12 +37,8 @@ export default function Register() {
         setLoading(true);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/auth/register`, {
+            const response = await apiFetch("/auth/register", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
                 body: JSON.stringify({
                     name: name(),
                     email: email(),
