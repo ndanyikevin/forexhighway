@@ -6,6 +6,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
+      "env": ["DATABASE_URL"],
       "outputs": [".output/**", "dist/**"]
     },
     "check-types": {
