@@ -8,10 +8,21 @@ const app = new Hono();
 
 app.onError(errorHandler);
 
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://forexhighway.vercel.app",
+];
+
 app.use(
     "*",
     cors({
-        origin: "http://localhost:3000",
+        origin: (origin) => {
+            if (allowedOrigins.includes(origin)) {
+                return origin;
+            }
+
+            return undefined;
+        },
         credentials: true,
     }),
 );
