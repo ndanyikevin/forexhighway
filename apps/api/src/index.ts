@@ -1,20 +1,7 @@
-import { Hono } from 'hono'
-import { serve } from '@hono/node-server'
 
-const app = new Hono()
+import { serve } from "@hono/node-server";
 
-app.get('/', (c) => {
-    return c.json({
-        ok: true,
-        message: 'ForexHighway API',
-    })
-})
-
-app.get('/health', (c) => {
-    return c.json({
-        ok: true,
-    })
-})
+import app from "./app.js";
 
 serve(
     {
@@ -22,6 +9,9 @@ serve(
         port: 4000,
     },
     (info) => {
-        console.log(`Server is listening on port ${info.port}`)
+        console.log(
+            `ForexHighway API listening on port ${ info.port } `,
+        );
     },
-)
+);
+

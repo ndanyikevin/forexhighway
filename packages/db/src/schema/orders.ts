@@ -7,7 +7,7 @@ import {
     varchar,
 } from "drizzle-orm/pg-core";
 
-import { tradingAccounts } from "./trading-accounts";
+import { tradingAccounts } from "./trading-accounts.js";
 
 export const orders = pgTable("orders", {
     id: serial("id").primaryKey(),
