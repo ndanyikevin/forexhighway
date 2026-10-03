@@ -3,8 +3,8 @@ import { MetaProvider, Title } from "@solidjs/meta";
 import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
+import { Toaster } from "~/components/ui/sonner";
 
-import PublicLayout from "~/components/layouts/public-layout";
 
 import "@fontsource/inter";
 import "./dark.css";
@@ -30,7 +30,7 @@ export default function App() {
 
                     <script innerHTML={themeScript} />
 
-                    
+                        <Toaster />
                         <Suspense>
                             {props.children}
                         </Suspense>
