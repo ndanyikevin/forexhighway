@@ -3,12 +3,12 @@ import "dotenv/config";
 
 import { eq } from "drizzle-orm";
 
-import { db } from "./index";
+import { db } from "./index.js";
 import {
     positions,
     tradingAccounts,
     users,
-} from "./schema";
+} from "./schema/index.js";
 
 // --------------------------------------------------
 // Seed data

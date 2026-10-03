@@ -2,11 +2,16 @@
   "name": "@forexhighway/db",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
   "scripts": {
+    "build": "tsc",
     "db:test": "tsx src/test-connection.ts",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
