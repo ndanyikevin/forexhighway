@@ -1,4 +1,4 @@
-import { randomBytes } from "node:crypto";
+import { nanoid } from "nanoid";
 
 import {
     createSession,
@@ -9,7 +9,7 @@ import {
 const SESSION_DURATION_DAYS = 7;
 
 function generateSessionToken(): string {
-    return randomBytes(32).toString("hex");
+    return nanoid(32);
 }
 
 function getSessionExpiration(): Date {
